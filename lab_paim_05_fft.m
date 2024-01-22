@@ -11,6 +11,31 @@ R = double(A);
 figure
 imshow(R, [])
 
+%% 
+R_fft  = fft2(R);
+
+imshow(R_fft, []);
+
+%%
+
+imshow(abs(R_fft), []);
+
+%% 
+
+[x, y] = meshgrid(linspace(0, 500), linspace(0, 500));
+
+figure
+surf(abs(R_fft), 'EdgeColor', 'none', 'FaceLighting','gouraud', 'FaceColor', [0.5 0.5 0.5])
+
+%%
+figure
+imshow(20*log10(R_fft+1), []);
+
+%%
+
+figure
+surf(20*log10(abs(fftshift(R_fft))+1))
+
 %% Calculo de FFT
 
 R_fft  = fft2(R);
@@ -42,8 +67,12 @@ imwrite(Gs, "espectro.png")
 %% Filtrado de la imagen
 
 filtro = imread("ejemplo_filtro_prueba.png");
+
+% filtro = imread("espectro2.png");
+
 filtro = im2gray(filtro);
 filtro = im2double(filtro);
+
 
 
 figure
@@ -53,6 +82,10 @@ figure
 surf(filtro)
 
 S_fft_shift = R_fft_shift .* filtro;
+
+figure
+surf(20* log10(abs(S_fft_shift)))
+
 S_fft = ifftshift(S_fft_shift);
 S = ifft2(S_fft);
 

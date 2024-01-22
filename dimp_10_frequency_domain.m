@@ -1,9 +1,9 @@
 [x, y] = meshgrid(linspace(0, 500), linspace(0, 500));
 
-A = imread("images/b.jpg");
-A = rgb2gray(A);
+A = imread("skel.png");
+A = im2gray(A);
 
-surf(A, 'EdgeColor','texturemap', 'FaceLighting','gouraud')
+surf(A, 'EdgeColor', 'none', 'FaceLighting','gouraud', 'FaceColor', [0.5 0.5 0.5])
 
 F = fft2(A);
 
